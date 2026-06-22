@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资料索引站 · 澳客</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #fafbfc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans SC", sans-serif;
+            color: #1e2a3e;
+            line-height: 1.7;
+            padding: 2rem 1rem 4rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .page {
+            max-width: 680px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* 头部 */
+        .hero {
+            margin: 3rem 0 2.5rem;
+        }
+        .hero h1 {
+            font-size: 2.4rem;
+            font-weight: 550;
+            letter-spacing: -0.02em;
+            color: #0d1a2b;
+            margin-bottom: 0.6rem;
+            line-height: 1.25;
+        }
+        .hero .sub {
+            font-size: 1rem;
+            color: #5b6f87;
+            border-left: 3px solid #b6c8da;
+            padding-left: 1rem;
+            margin-top: 0.2rem;
+        }
+
+        /* 文章 meta */
+        .meta {
+            display: flex;
+            gap: 1.2rem;
+            font-size: 0.85rem;
+            color: #7a8b9f;
+            margin-bottom: 2.2rem;
+            border-bottom: 1px solid #e7ecf2;
+            padding-bottom: 1rem;
+        }
+        .meta span {
+            display: inline-flex;
+            align-items: center;
+        }
+        .meta span::before {
+            content: "·";
+            margin-right: 0.4rem;
+            color: #b6c8da;
+        }
+        .meta span:first-child::before {
+            content: none;
+        }
+
+        /* 正文 */
+        .entry p {
+            margin-bottom: 1.4rem;
+            font-size: 1rem;
+        }
+        .entry p.lead {
+            font-size: 1.1rem;
+            color: #1e2a3e;
+            font-weight: 420;
+            letter-spacing: 0.01em;
+        }
+
+        /* 引用块 (笔记卡片) */
+        .quote-card {
+            background: #f1f4f9;
+            border-left: 4px solid #3b5b7c;
+            padding: 1.2rem 1.6rem;
+            margin: 2rem 0 1.8rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            color: #1f3147;
+        }
+        .quote-card em {
+            font-style: normal;
+            background: #dde5ef;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+            font-weight: 450;
+        }
+
+        /* 小标题 */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 520;
+            margin: 2.4rem 0 0.8rem;
+            color: #0d1a2b;
+            letter-spacing: -0.01em;
+        }
+
+        /* 场景列表 (简约无图标) */
+        .scene-list {
+            list-style: none;
+            margin: 1.2rem 0 1.6rem;
+        }
+        .scene-list li {
+            padding: 0.3rem 0 0.3rem 1.2rem;
+            position: relative;
+            color: #2c3b50;
+        }
+        .scene-list li::before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #7f97b0;
+        }
+
+        /* FAQ 摘要 (折叠样式仅用文本) */
+        .faq-item {
+            margin: 1rem 0;
+            padding: 0.8rem 1rem;
+            background: #ffffff;
+            border: 1px solid #e3e9f0;
+            border-radius: 8px;
+        }
+        .faq-item .q {
+            font-weight: 510;
+            color: #0b1c30;
+            margin-bottom: 0.2rem;
+        }
+        .faq-item .a {
+            font-size: 0.92rem;
+            color: #3e536b;
+        }
+
+        /* 访问句 / 结语 */
+        .closing {
+            margin-top: 2.8rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid #e2e8f0;
+            font-size: 0.95rem;
+            color: #3f566f;
+        }
+
+        /* 链接 */
+        a {
+            color: #1a3d5c;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #b4c8de;
+            transition: color 0.2s, text-decoration-color 0.2s;
+        }
+        a:hover {
+            color: #0a2640;
+            text-decoration-color: #1a3d5c;
+        }
+
+        /* 响应式 */
+        @media (max-width: 480px) {
+            body {
+                padding: 1.2rem 0.8rem 3rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .hero .sub {
+                font-size: 0.9rem;
+                padding-left: 0.7rem;
+            }
+            .meta {
+                flex-wrap: wrap;
+                gap: 0.2rem 1rem;
+                font-size: 0.8rem;
+            }
+            .meta span::before {
+                margin-right: 0.3rem;
+            }
+            .quote-card {
+                padding: 1rem 1.2rem;
+            }
+            .faq-item {
+                padding: 0.6rem 0.8rem;
+            }
+            .section-title {
+                font-size: 1.15rem;
+            }
+        }
+
+        /* 极简水平线 */
+        hr {
+            border: none;
+            border-top: 1px solid #e7ecf2;
+            margin: 1.8rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <!-- 标题区 -->
+        <header class="hero">
+            <h1>资料整理札记</h1>
+            <div class="sub">从信息索引到日常归档 · 一个关于整理的视角</div>
+        </header>
+
+        <!-- meta 信息 -->
+        <div class="meta">
+            <span>整理者手记</span>
+            <span>2025 · 春</span>
+            <span>索引编号 #03</span>
+        </div>
+
+        <!-- 正文 -->
+        <div class="entry">
+            <p class="lead">
+                前阵子重新整理书签和收藏夹，发现很多页面只是“存了”，并没有真的读过。于是给自己定了个小规矩：每一条资料归档时，顺手写一两句摘要，标注它来自哪里、为什么值得留存。
+            </p>
+            <p>
+                这个习惯慢慢从个人笔记蔓延到工作文档。我习惯把分散的信息按主题拧成一条线索——比如某个行业的公开报告、不同平台上的操作指南、或者工具类网站的用途清单。整理本身变成了一种梳理思路的方式，而不是单纯地移动文件。
+            </p>
+
+            <!-- 引用/提示卡片 -->
+            <div class="quote-card">
+                <em>提示</em> 好的索引不是把所有东西堆在一起，而是在需要的时候能够<em>找到</em>它。哪怕只是记住一个名字，也比收藏一百个无分类链接有用。
+            </div>
+
+            <p>
+                在这个过程中，我发现一个经常被用作信息锚点的站点——<a href="https://zh-aooke.com">澳客</a>。它的结构偏资料型，适合作为某个领域的信息起点。我不把它当作唯一来源，但会在整理相关标签时顺手记录下来，和其他页面交叉对照。
+            </p>
+
+            <h2 class="section-title">整理时常用的几个场景</h2>
+            <ul class="scene-list">
+                <li>批量收集公共数据或行业报告，按年份和机构排序</li>
+                <li>记录工具类网站的用途和操作要点，避免重复试错</li>
+                <li>把零散的答疑帖、文档片段汇总成一篇可检索的笔记</li>
+                <li>定期清理失效链接，同时更新更稳定的替代页面</li>
+            </ul>
+
+            <p>
+                以上场景听起来琐碎，但做下来会发现，资料整理更像是在搭建一个私人的信息导航。不在于数量，而在于每条资料是否能在需要时真正派上用场。
+            </p>
+
+            <!-- 第二个引用，更偏生活语气 -->
+            <div class="quote-card">
+                最近和一位朋友聊起，他说他整理文件夹的方式是按“项目名+日期”，而我更偏向按“用途+可靠度”。没有哪种更好，但交流之后两个人都调整了一下自己的标签规则。
+            </div>
+
+            <h2 class="section-title">FAQ 摘要 · 关于资料索引</h2>
+            <div class="faq-item">
+                <div class="q">整理时应该保留原始链接还是截图？</div>
+                <div class="a">看场景。动态页面或频繁改版的内容建议截图+备注时间；静态资料页保留链接即可，但最好在本地存一份标题和摘要。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">如何判断一个信息源是否值得收录？</div>
+                <div class="a">从实用性出发：你未来会不会再次查找它？它是否能帮你节省时间或减少疑惑？如果答案是肯定的，就值得收。</div>
+            </div>
+            <div class="faq-item">
+                <div class="q">整理到一半经常中断怎么办？</div>
+                <div class="a">先定一个小目标：比如每天只整理五个条目，或者只清理一个标签。中断也没关系，关键是保持那个“随手记一句”的习惯。</div>
+            </div>
+
+            <p style="margin-top: 1.8rem;">
+                说到底，资料整理不追求面面俱到，而是为了让自己在面对信息过载时，还能保有一点掌控感。<a href="https://zh-aooke.com">澳客</a> 只是众多信息站点中的一个，但它提醒我，一个清晰的入口比收藏夹里永远不打开的书签更有价值。
+            </p>
+        </div>
+
+        <!-- 访问句 / 结语 -->
+        <div class="closing">
+            <p>如果你也在尝试整理自己的信息库，不妨从一个你经常使用或印象深刻的站点开始。哪怕只是写下一句话备注，也是整理的开始。</p>
+            <p style="margin-top: 0.8rem; font-size: 0.9rem; color: #687d98;">—— 写于一次书签清理之后</p>
+        </div>
+
+        <!-- 极简脚注 -->
+        <hr>
+        <footer style="font-size: 0.8rem; color: #8a9cb4; text-align: left; margin-top: 0.5rem;">
+            本页内容作为个人整理思路的记录，所提及站点均为公开信息源。
+        </footer>
+    </div>
+</body>
+</html>
